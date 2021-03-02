@@ -11,6 +11,7 @@
     <module>tiendamusical-services</module>
     <module>tiendamusical-web</module>
   </modules>
+
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <maven.compiler.source>14</maven.compiler.source>

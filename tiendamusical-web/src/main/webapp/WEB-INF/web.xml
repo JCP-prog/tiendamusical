@@ -4,6 +4,7 @@
 
 <web-app>
   <display-name>Archetype Created Web Application</display-name>
+<<<<<<< HEAD
   
     <context-param>
 		<param-name>contextConfigLocation</param-name>
@@ -44,4 +45,6 @@
         <servlet-name>Faces Servlet</servlet-name>
         <url-pattern>*.xhtml</url-pattern>
     </servlet-mapping>
+=======
+>>>>>>> branch 'master' of https://github.com/JCP-prog/tiendamusical.git
 </web-app>
