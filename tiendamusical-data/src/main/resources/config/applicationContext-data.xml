@@ -58,6 +58,6 @@
 	<tx:annotation-driven transaction-manager="transactionManager"/>
 	
 	<!-- ETIQUETA QUE PERMITE REGISTRAR LAS CLASES QUE SE ENCARGAN DE LAS TRANSACCIONES A LA BASE DE DATOS (DAO) -->
-	<jpa:repositories base-package="com.jimmyc.tiendamusicaldata.repositories" entity-manager-factory-ref="emf"></jpa:repositories>
+	<jpa:repositories base-package="com.jimmyc.tiendamusicaldata.dao" entity-manager-factory-ref="emf"></jpa:repositories>
 
 </beans>
