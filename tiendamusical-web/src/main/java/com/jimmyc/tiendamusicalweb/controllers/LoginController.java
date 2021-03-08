@@ -3,6 +3,8 @@
  */
 package com.jimmyc.tiendamusicalweb.controllers;
 
+import java.io.IOException;
+
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
@@ -11,6 +13,7 @@ import javax.faces.bean.ViewScoped;
 
 import com.jimmyc.tiendamusicalentities.entities.Persona;
 import com.jimmyc.tiendamusicalservices.service.LoginService;
+import com.jimmyc.tiendamusicalweb.session.SessionBean;
 import com.jimmyc.tiendamusicalweb.utils.CommonUtils;
 
 /**
@@ -37,6 +40,12 @@ public class LoginController {
 	@ManagedProperty("#{loginServiceImpl}") 
 	private LoginService loginServiceImpl;
 	
+	/**
+	 * Propiedad de la logica del negocio inyectada con JSF y Spring
+	 */
+	@ManagedProperty("#{sessionBean}") 
+	private SessionBean sessionBean;
+	
 	@PostConstruct
 	public void init() {
 		System.out.println("Inicializando login...");
@@ -50,7 +59,14 @@ public class LoginController {
 		Persona personaConsultada = this.loginServiceImpl.consultarUsuarioLogin(this.usuario, this.password);
 		//if (this.usuario.equals("jimmyc") && this.password.equals("12345")) {
 		if(personaConsultada != null)	{
-			CommonUtils.mostrarMensaje(FacesMessage.SEVERITY_INFO, "¡EXITOSO!", "Bienvenido al Home :)");
+			//CommonUtils.mostrarMensaje(FacesMessage.SEVERITY_INFO, "¡EXITOSO!", "Bienvenido al Home :)");
+			try {
+				this.sessionBean.setPersona(personaConsultada);
+				CommonUtils.redireccionar("/pages/commons/dashboard.xhtml");
+			} catch (IOException e) {
+				CommonUtils.mostrarMensaje(FacesMessage.SEVERITY_FATAL, "¡ERROR!", "Formato incorrecto en el cual se quiere ingresar a la pantalla deseada :(");
+				e.printStackTrace();
+			}
 		} else {
 			CommonUtils.mostrarMensaje(FacesMessage.SEVERITY_ERROR, "¡UPSS!", "El usuario y/o contraseña son incorrectos :(");
 		}
@@ -96,6 +112,20 @@ public class LoginController {
 	 */
 	public void setLoginServiceImpl(LoginService loginServiceImpl) {
 		this.loginServiceImpl = loginServiceImpl;
+	}
+
+	/**
+	 * @return the sessionBean
+	 */
+	public SessionBean getSessionBean() {
+		return sessionBean;
+	}
+
+	/**
+	 * @param sessionBean the sessionBean to set
+	 */
+	public void setSessionBean(SessionBean sessionBean) {
+		this.sessionBean = sessionBean;
 	}
 	
 }

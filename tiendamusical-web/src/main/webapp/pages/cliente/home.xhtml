@@ -1,0 +1,72 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+	<div class="p-grid">
+		<div class="p-col" >
+			<div class="box" style="background-color: black;">
+				<div class="ui-inputgroup" style="display: block;text-align: center;">
+					<p:inputText id="txtBuscador" style="width: 90%; margin-bottom: 20px;" value="#{homeController.filtro}" placeholder="Artista, Album, etc." >
+						<p:ajax event="keyup" listener="#{homeController.consultarAlbumsArtistasPorFiltro}" update="pnlResultados"></p:ajax>
+					</p:inputText>
+				</div>
+				
+				<div class="ui-inputgroup">
+					<p:panel id="pnlResultados" style="width:90%; margin: 0px auto; border: none; ">
+						
+						<p:dataView id="dataViewResultados" var="artistaAlbumDTO" value="#{homeController.artistasAlbumDTO}" 
+									rows="10" paginator="true" rowsPerPageTemplate="5,10,30,50" paginatorPosition="bottom"
+				                    paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+				                    gridIcon="pi pi-th-large" listIcon="pi pi-bars" 
+				                    style="width:100%; margin: 0px auto; background-color: black; border:none" 
+				                    rendered="#{not empty homeController.artistasAlbumDTO}" layout="grid">
+	
+						            <p:dataViewGridItem columns="4">
+						            
+						            	<p:panel header="#{artistaAlbumDTO.album.nombre}" style="text-align: center; background-color: black; border:none">
+						            		<h:panelGrid columns="1" style="width:100%; text-align: center">
+														<p:graphicImage name="imagenes/albums/#{artistaAlbumDTO.album.imagen}" style="width:100%"  height="200px" ></p:graphicImage>
+								            																															
+								            			<h:outputText value="#{artistaAlbumDTO.artista.nombre}" style="color:white"></h:outputText>
+								            			<h:outputText value="#{artistaAlbumDTO.album.valor}" style="color:white">
+								            				<f:convertNumber type="currency" currencyCode="PEN" currencySymbol="S/ "></f:convertNumber>
+								            			</h:outputText>
+							
+						            		</h:panelGrid>
+						            	
+						            	</p:panel>
+						               
+						            </p:dataViewGridItem>
+						
+						            <p:dataViewListItem style="background-color: black" >
+						                <h:panelGrid columns="3" style="width:100%; text-align: center; background-color:black; border:none" columnClasses="logo, detail">
+						            		<p:graphicImage name="imagenes/albums/#{artistaAlbumDTO.album.imagen}" style="width:100%" ></p:graphicImage>
+						            		
+						            		<p:outputPanel>
+						            				<h:panelGrid columns="2" cellpadding="5">	
+														   
+									            			<h:outputText value="Titulo:" style="color:white; font-weight:bold"></h:outputText>
+									            			<h:outputText value="#{artistaAlbumDTO.artista.nombre}" style="color:white; "></h:outputText>
+									            			
+									            			<h:outputText value="Precio:" style="color:white; font-weight:bold"></h:outputText>
+									            			<h:outputText value="#{artistaAlbumDTO.album.valor}" style="color:white; ">
+									            				<f:convertNumber type="currency" currencyCode="PEN" currencySymbol="S/ "></f:convertNumber>
+						            						</h:outputText>
+						            			     </h:panelGrid>
+						            		</p:outputPanel>
+						            		
+						            		<p:commandButton url="#" icon="pi pi-shopping-cart" title="Shop"></p:commandButton>
+						            	</h:panelGrid>
+						            	
+						            </p:dataViewListItem>
+			        	</p:dataView>
+			        
+					</p:panel>
+				</div>
+			</div>	
+		</div>
+	</div>
+		
+</ui:composition>
