@@ -3,9 +3,11 @@
  */
 package com.jimmyc.tiendamusicalweb.controllers;
 
+import java.io.IOException;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
@@ -15,6 +17,8 @@ import org.apache.logging.log4j.Logger;
 
 import com.jimmyc.tiendamusicalentities.dto.ArtistaAlbumDTO;
 import com.jimmyc.tiendamusicalservices.service.HomeService;
+import com.jimmyc.tiendamusicalweb.session.SessionBean;
+import com.jimmyc.tiendamusicalweb.utils.CommonUtils;
 
 /**
  * @author JimmyC
@@ -45,6 +49,12 @@ public class HomeController {
 	@ManagedProperty("#{homeServiceImpl}")
 	private HomeService homeServiceImpl;
 	
+	/** 
+	 * Objeto que almacena informacion en sesion
+	 */
+	@ManagedProperty("#{sessionBean}")
+	private SessionBean sessionBean;
+	
 	/**
 	 * Metodo que inicializa la pantalla
 	 */
@@ -69,6 +79,20 @@ public class HomeController {
 			});
 		}
 		
+	}
+	
+	/**
+	 * Metodo que permite ver el detalle del album seleccionado por el cliente.
+	 * @param artistaAlbumDTO {@link ArtistaAlbumDTO} objeto con el album seleccionado
+	 */
+	public void verDetalleAlbum(ArtistaAlbumDTO artistaAlbumDTO) {
+		this.sessionBean.setArtistaAlbumDTO(artistaAlbumDTO);
+		try {
+			CommonUtils.redireccionar("/pages/cliente/detalle.xhtml");
+		} catch (IOException e) {
+			CommonUtils.mostrarMensaje(FacesMessage.SEVERITY_ERROR, "¡UPS!", "Hubo un error de formato en la pagina a ingresar. Favor de contactar con soporte.");
+			e.printStackTrace();
+		}
 	}
 
 	/**
@@ -111,5 +135,19 @@ public class HomeController {
 	 */
 	public void setHomeServiceImpl(HomeService homeServiceImpl) {
 		this.homeServiceImpl = homeServiceImpl;
+	}
+
+	/**
+	 * @return the sessionBean
+	 */
+	public SessionBean getSessionBean() {
+		return sessionBean;
+	}
+
+	/**
+	 * @param sessionBean the sessionBean to set
+	 */
+	public void setSessionBean(SessionBean sessionBean) {
+		this.sessionBean = sessionBean;
 	}
 }

@@ -5,43 +5,37 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
 
-<h:head>
-	<ui:include src="/pages/commons/scripts.xhtml" />
-</h:head>
-
-<h:body style="background-color: black">
-	<div class="ui-fluid">
-		<h:form id="formDashboard">
-		
-			<ui:include src="/pages/commons/navbar.xhtml"></ui:include>
-			<div class="p-grid sample-layout">
-				<div class="p-col-12 p-md-2" style="background-color: black;">
+	<h:head>
+		<ui:include src="/pages/commons/scripts.xhtml" />
+	</h:head>
+	
+	<h:body style="background-color: black">
+		<div class="ui-fluid">
+			<h:form id="formDashboard">
+			
+				<ui:include src="/pages/commons/navbar.xhtml"></ui:include>
+				<div class="p-grid sample-layout">
 					
-					<p:commandLink>
-						<p:graphicImage name="imagenes/fondo_musica.png" width="100%"></p:graphicImage>
-					</p:commandLink>
+					<ui:include src="/pages/commons/header.xhtml" />
 					
-					<ui:include src="/pages/commons/panelmenu.xhtml" />
-				</div>
-				<div class="p-col-12 p-md-10 p-col-nogutter" style="background-color: black;">
-					<div class="p-grid" >
-						<div class="p-col-12">
-							<!--  <p:outputLabel value="#{sessionBean.persona.nombre}" style="color:white"></p:outputLabel>-->
-							
-							<!-- PANTALLAS DEL CLIENTE -->
-							<c:if test="#{sessionBean.persona.rol.idRol == 4}">
-								<ui:include src="/pages/cliente/home.xhtml" />
-							</c:if>
+					<div class="p-col-12 p-md-10 p-col-nogutter" style="background-color: black;">
+						<div class="p-grid" >
+							<div class="p-col-12">
+								<!--  <p:outputLabel value="#{sessionBean.persona.nombre}" style="color:white"></p:outputLabel>-->
+								
+								<!-- PANTALLAS DEL CLIENTE -->
+								<c:if test="#{sessionBean.persona.rol.idRol == 4}">
+									<ui:include src="/pages/cliente/home.xhtml" />
+								</c:if>
+							</div>
 						</div>
 					</div>
+					
+					<ui:include src="/pages/commons/footer.xhtml" />
 				</div>
-				<div class="p-col-12" style="background-color: black;">
-					<p:outputLabel value="@Copyright JimmyC" style="color:white"></p:outputLabel>
-				</div>
-			</div>
-		
-		</h:form>
-	</div>
-</h:body>
+			
+			</h:form>
+		</div>
+	</h:body>
 
 </html>

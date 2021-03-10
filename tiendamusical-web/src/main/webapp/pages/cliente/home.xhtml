@@ -27,12 +27,14 @@
 						            
 						            	<p:panel header="#{artistaAlbumDTO.album.nombre}" style="text-align: center; background-color: black; border:none">
 						            		<h:panelGrid columns="1" style="width:100%; text-align: center">
-														<p:graphicImage name="imagenes/albums/#{artistaAlbumDTO.album.imagen}" style="width:100%"  height="200px" ></p:graphicImage>
-								            																															
-								            			<h:outputText value="#{artistaAlbumDTO.artista.nombre}" style="color:white"></h:outputText>
-								            			<h:outputText value="#{artistaAlbumDTO.album.valor}" style="color:white">
-								            				<f:convertNumber type="currency" currencyCode="PEN" currencySymbol="S/ "></f:convertNumber>
-								            			</h:outputText>
+						            				<p:commandLink action="#{homeController.verDetalleAlbum(artistaAlbumDTO)}">
+						            					<p:graphicImage name="imagenes/albums/#{artistaAlbumDTO.album.imagen}" style="width:100%"  height="200px" ></p:graphicImage>
+						            				</p:commandLink>
+																																										
+							            			<h:outputText value="#{artistaAlbumDTO.artista.nombre}" style="color:white"></h:outputText>
+							            			<h:outputText value="#{artistaAlbumDTO.album.valor}" style="color:white">
+							            				<f:convertNumber type="currency" currencyCode="PEN" currencySymbol="S/ "></f:convertNumber>
+							            			</h:outputText>
 							
 						            		</h:panelGrid>
 						            	
@@ -42,8 +44,9 @@
 						
 						            <p:dataViewListItem style="background-color: black" >
 						                <h:panelGrid columns="3" style="width:100%; text-align: center; background-color:black; border:none" columnClasses="logo, detail">
-						            		<p:graphicImage name="imagenes/albums/#{artistaAlbumDTO.album.imagen}" style="width:100%" ></p:graphicImage>
-						            		
+						            		<p:commandLink action="#{homeController.verDetalleAlbum(artistaAlbumDTO)}">
+						            			<p:graphicImage name="imagenes/albums/#{artistaAlbumDTO.album.imagen}" style="width:100%" ></p:graphicImage>
+						            		</p:commandLink>
 						            		<p:outputPanel>
 						            				<h:panelGrid columns="2" cellpadding="5">	
 														   
