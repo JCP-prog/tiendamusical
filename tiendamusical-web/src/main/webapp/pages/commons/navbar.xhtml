@@ -7,8 +7,8 @@
 
 	<p:menubar id="menubar" style="background-color:black">
 		<f:facet name="options">
-			<p:commandButton id="btnShopping" icon="pi pi-shopping-cart">
-				<pe:badge content="2" rendered="true"></pe:badge>
+			<p:commandButton id="btnShopping" icon="pi pi-shopping-cart" action="#{navBarController.redireccionar}">
+				<pe:badge content="#{sessionBean.persona.carrito.carritosAlbum.size()}" rendered="#{not empty sessionBean.persona.carrito.carritosAlbum.size()}"></pe:badge>
 			</p:commandButton>
 			<p:commandButton id="btnCerrarSesion" icon="pi pi-sign-out" action="#{sessionClosed.cerrarSesion}"></p:commandButton>
 		</f:facet>

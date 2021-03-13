@@ -28,6 +28,11 @@ public class SessionBean {
 	 * Objeto que contendra la informacion del detalle del album seleccionado por el cliente
 	 */
 	private ArtistaAlbumDTO artistaAlbumDTO;
+
+	/** 
+	 * total generado de la compra en sesion
+	 */
+	private float totalCompra;
 	
 	@PostConstruct
 	public void init() {
@@ -60,5 +65,19 @@ public class SessionBean {
 	 */
 	public void setArtistaAlbumDTO(ArtistaAlbumDTO artistaAlbumDTO) {
 		this.artistaAlbumDTO = artistaAlbumDTO;
+	}
+
+	/**
+	 * @return the totalCompra
+	 */
+	public float getTotalCompra() {
+		return totalCompra;
+	}
+
+	/**
+	 * @param totalCompra the totalCompra to set
+	 */
+	public void setTotalCompra(float totalCompra) {
+		this.totalCompra = totalCompra;
 	}
 }
