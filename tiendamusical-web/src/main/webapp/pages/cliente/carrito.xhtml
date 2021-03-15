@@ -38,12 +38,12 @@
 											            			<h:outputText value="Titulo:" style="color:white; "></h:outputText>
 											            			<h:outputText value="#{carritoAlbum.album.nombre}" style="color:white; "></h:outputText>
 												            		
-												            		<h:outputText value="Album:" style="color:white; "></h:outputText>
+												            		<h:outputText value="Artista:" style="color:white; "></h:outputText>
 											            			<h:outputText value="#{carritoAlbum.album.artista.nombre}" style="color:white; "></h:outputText>
 												            			
 												            		<h:outputText value="Precio:" style="color:white; "></h:outputText>
 												            		<h:outputText value="#{carritoAlbum.album.valor}" style="color:white; ">
-												            				<f:convertNumber type="currency" currencyCode="PEN" currencySymbol="S/ "></f:convertNumber>
+												            				<f:convertNumber type="currency" currencyCode="MXN" currencySymbol="$"></f:convertNumber>
 									            					</h:outputText>
 									            					
 									            					<h:outputText value="Disquera:" style="color:white;" ></h:outputText>
@@ -59,15 +59,15 @@
 															<f:selectItem itemValue="4" itemLabel="4" ></f:selectItem>
 															<f:selectItem itemValue="5" itemLabel="5" ></f:selectItem>
 															
-															<p:ajax event="change" listener="#{carritoController.actualizarCarrito(carritoAlbum)}" update="formCarrito:pnlTotalCompra, formCarrito:dataViewDetalleCarrito"></p:ajax>
+															<p:ajax event="change" listener="#{carritoController.actualizarCantidadCarrito(carritoAlbum)}" update="formCarrito:pnlTotalCompra, formCarrito:dataViewDetalleCarrito"></p:ajax>
 									            		</p:selectOneMenu>
 									            		
 									            		<p:commandButton icon="pi pi-trash" style="background-color: red; border:none" action="#{carritoController.eliminarAlbumCarrito(carritoAlbum)}" update="formCarrito:menubar, formCarrito:dataViewDetalleCarrito, formCarrito:pnlTotalCompra">
-									            			<p:confirm header="Confirmar" message="¿Estas seguro de eliminar el producto #{carritoAlbum.album.nombre}?" icon="pi pi-info-circle"/>
+									            			<p:confirm header="Confirmar" message="¿Estas seguro de eliminar el producto #{carritoAlbum.album.nombre}?" icon="pi pi-exclamation-triangle"/>
 									            		</p:commandButton>
 									            	
 									            		<p:outputLabel value="#{carritoAlbum.album.valor * carritoAlbum.cantidad}" style="color:white">
-									            			<f:convertNumber type="currency" currencyCode="PEN" currencySymbol="S/ "></f:convertNumber>
+									            			<f:convertNumber type="currency" currencyCode="MXN" currencySymbol="$"></f:convertNumber>
 									            		</p:outputLabel>
 									            	</p:panelGrid>
 									            	
@@ -80,7 +80,7 @@
 			        			  	<p:outputLabel ></p:outputLabel>
 			        			  	<p:outputLabel value="Total: " style="color:white"></p:outputLabel>
 			        			  	<p:outputLabel value="#{carritoController.sessionBean.totalCompra}" style="color:white">
-			        			  		<f:convertNumber type="currency" currencyCode="PEN" currencySymbol="S/ "></f:convertNumber>
+			        			  		<f:convertNumber type="currency" currencyCode="MXN" currencySymbol="$"></f:convertNumber>
 			        			  	</p:outputLabel>
 			        			  </p:panelGrid>
 			        			  
@@ -89,9 +89,7 @@
 				        			  <p:outputLabel ></p:outputLabel>
 				        			  <p:outputLabel ></p:outputLabel>
 				        			  <p:outputLabel ></p:outputLabel>
-				        			  <p:commandButton value="Continuar" style="margin-top: 40px; width:100%" disabled="#{empty sessionBean.persona.carrito.carritosAlbum}">
-										            		
-									  </p:commandButton>
+				        			  <p:commandButton value="Continuar" style="margin-top: 40px; width:100%" disabled="#{empty sessionBean.persona.carrito.carritosAlbum}" action="#{pasosController.cambiarPaso('/pages/cliente/pago.xhtml',1)}"></p:commandButton>
 								  </p:panelGrid>
 									            	
 			        			  <p:confirmDialog global="true" showEffect="fade" hideEffect="fade" responsive="true" >

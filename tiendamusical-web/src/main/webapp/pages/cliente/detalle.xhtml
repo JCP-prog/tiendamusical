@@ -41,7 +41,7 @@
 												
 												<p:outputLabel value="Precio: " style="color:white"></p:outputLabel>
 												<p:outputLabel value="#{sessionBean.artistaAlbumDTO.album.valor}" style="color:white">
-													<f:convertNumber type="currency" currencyCode="PEN" currencySymbol="S/ "></f:convertNumber>
+													<f:convertNumber type="currency" currencyCode="MXN" currencySymbol="$"></f:convertNumber>
 												</p:outputLabel>
 												
 												<p:commandButton icon="pi pi-shopping-cart" action="#{detalleController.agregarAlbumCarrito(sessionBean.artistaAlbumDTO)}" update="formDetalle:btnShopping"></p:commandButton>

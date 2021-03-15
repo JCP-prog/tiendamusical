@@ -29,6 +29,25 @@
 			<groupId>com.jimmyc</groupId>
 			<version>0.0.1-SNAPSHOT</version>
 		</dependency>
+		
+		<dependency>
+			<artifactId>checkout-sdk</artifactId>
+			<groupId>com.paypal.sdk</groupId>
+			<version>${paypal-checkout-version}</version>
+		</dependency>
+		
+		<dependency>
+			<artifactId>json</artifactId>
+			<groupId>org.json</groupId>
+			<version>${json-version}</version>
+		</dependency>
+		
+		<dependency>
+			<artifactId>commons-lang3</artifactId>
+			<groupId>org.apache.commons</groupId>
+			<version>${commons-lang3-version}</version>
+		</dependency>
+		
 	</dependencies>
 
 	<build>

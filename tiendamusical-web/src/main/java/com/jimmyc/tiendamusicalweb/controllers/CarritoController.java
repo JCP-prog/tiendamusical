@@ -46,6 +46,7 @@ public class CarritoController {
 	 */
 	@PostConstruct
 	public void init() {
+		this.sessionBean.setPaso(0);
 		this.calcularTotal();
 	}
 	
@@ -75,7 +76,7 @@ public class CarritoController {
 	 * Metodo que permite actualizar la cantidad y los totales del album a comprar.
 	 * @param carritoAlbum {@link CarritoAlbum} objeto que contiene el album a actualizar y su cantidad.
 	 */
-	public void actualizarCarrito(CarritoAlbum carritoAlbum) {
+	public void actualizarCantidadCarrito(CarritoAlbum carritoAlbum) {
 		float totalCompra = this.carritoServiceImpl.actualizarAlbumCantidad(carritoAlbum, this.sessionBean.getPersona().getCarrito());
 		
 		this.sessionBean.setTotalCompra(totalCompra);

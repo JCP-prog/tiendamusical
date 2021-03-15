@@ -1,0 +1,76 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+	<h:head>
+		<ui:include src="/pages/commons/scripts.xhtml" />
+		<script src="https://www.paypal.com/sdk/js?client-id=ARYk9ss8CmWDc9PVL0EJDiMzj2WPXS5FWXLwquCjoW98jVKL67fAe97FXHb55Q0fuNMm0Y0pAciKyvko&amp;currency=MXN"></script>
+		<script >
+			paypal.Buttons({
+				createOrder: function(data, actions) {
+				     return fetch('../../PayPalServlet', {
+						method: 'post',
+						headers: {
+							'content-type': 'application/json'
+						}
+					 }).then(function (response) {
+						 var json = response.json();
+						console.log("RESPONSE: "+JSON.stringify(json));
+						return json;
+					}).then(function (data) {
+						console.log("DATA: "+JSON.stringify(data));
+						return data.result.id;
+					})
+			    },
+			    onApprove: function (data, actions) {
+					return actions.order.capture().then( function (detalle) {
+						// generar la factura con la orden de compra
+					})
+				}
+			}).render('#divPayPalContainer');
+		</script>    
+	</h:head>
+	
+	<h:body style="background-color: black">
+		<div class="ui-fluid">
+			<h:form id="formPago">
+			
+				<ui:include src="/pages/commons/navbar.xhtml"></ui:include>
+				<div class="p-grid sample-layout">
+					
+					<ui:include src="/pages/commons/header.xhtml" />
+					
+					<div class="p-col-12 p-md-10 p-col-nogutter" style="background-color: black">
+						<div class="p-grid" >
+							<div class="p-col-12">
+							
+								<ui:include src="/pages/commons/steps.xhtml"></ui:include>
+								
+								<div class="p-col" style="width:90%; margin: 0px auto; text-align:center">
+									<div id="divPayPalContainer" class="p-col" style="width:100%; margin: 0px auto">
+									
+									</div>
+								
+								</div>
+									
+								<p:panelGrid columns="5" columnClasses="ui-g-12 ui-md-2, ui-g-12 ui-md-4, ui-g-12 ui-md-2, ui-g-12 ui-md-2, ui-g-12 ui-md-2, logo, detail" layout="grid" style="width:100%; text-align: center; background-color:black; border:none">
+				        			  <p:outputLabel ></p:outputLabel>
+				        			  <p:outputLabel ></p:outputLabel>
+				        			  <p:outputLabel ></p:outputLabel>
+				        			  <p:outputLabel ></p:outputLabel>
+				        			  <p:commandButton value="Continuar" style="margin-top: 40px; width:100%" disabled="#{empty sessionBean.persona.carrito.carritosAlbum}"></p:commandButton>
+								</p:panelGrid>						
+							</div>
+						</div>
+					</div>
+					
+					<ui:include src="/pages/commons/footer.xhtml" />
+				</div>
+			
+			</h:form>
+		</div>
+	</h:body>
+		
+</html>
